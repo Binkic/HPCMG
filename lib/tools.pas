@@ -234,3 +234,24 @@ Begin
 	textcolor(7);
 	if en=1 then writeln;
 End;
+
+
+Procedure CreateDir(s:string);
+Var
+	s1:string;
+	t:text;
+	i:longint;
+Begin
+	while pos('\',s)<>0 do begin
+            s1:=s1+ copy (s,1,pos('\',s));
+            delete(s,1,pos('\',s));
+            assign(t,s1+'ExistTest.txt');
+            reset(t);
+            i:=IOresult;
+            if i=3 then mkdir(s1)
+                    else
+                    begin
+                        if i=0 then close(t);
+                    end;
+    end;
+End;

@@ -97,7 +97,7 @@ End;
 {================================ = Main = ==================================}
 {============================================================================}
 Begin
-        NowVersion:=24;
+        NowVersion:=25;
         sett.add:=true;
         i:=1;
         rundir:='';
@@ -169,54 +169,11 @@ Begin
 
         {Is OUTPUT Foder Exist?}
         if outdir='' then begin
-                s:=rundir;
-                i:=0;
-                while pos('\',s)<>0 do begin
-                        s1:=s1+ copy (s,1,pos('\',s));
-                        delete(s,1,pos('\',s));
-                        assign(t,s1+'ExistTest.txt');
-                        reset(t);
-                        i:=IOresult;
-                        if i=3 then mkdir(s1)
-                                else
-                                 begin
-                                       if i=0 then close(t);
-                                end;
-                end;
-
-                assign(t,rundir+'out\ExistTest.txt');
-                reset(t);
-                i:=IOresult;
-                if i=3 then mkdir(rundir+'out\')
-                        else
-                        begin
-                                if i=0 then close(t);
-                        end;
-
-                assign(t,rundir+'out\'+Randomseed+'\ExistTest.txt');reset(t);
-                i:=IOresult;
-                if i=3 then mkdir(rundir+'out\'+randomseed)
-                        else
-                        begin
-                                if i=0 then close(t);
-                        end;
+				CreateDir(rundir+'out\'+Randomseed+'\');
         end
         else
         begin
-                s:=outdir;
-                i:=0;
-                while pos('\',s)<>0 do begin
-                        s1:=s1+ copy (s,1,pos('\',s));
-                        delete(s,1,pos('\',s));
-                        assign(t,s1+'ExistTest.txt');
-                        reset(t);
-                        i:=IOresult;
-                        if i=3 then mkdir(s1)
-                                else
-                                begin
-                                        if i=0 then close(t);
-                                end;
-                end;
+				CreateDir(outdir);
         end;
 
 

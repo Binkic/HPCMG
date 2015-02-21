@@ -1,140 +1,143 @@
-Eric���Թ����ɹ���
+﻿Eric的迷宫生成工具
 
 2014-8-13
-??? : ��ʼ����ƻ��������һ����˹��ܣ�ȥ����һ��pediawiki
-ADD : ��ͼ���ӣ����������ĵ�ͼ [��������״]
+??? : 开始这个计划，想象并且划分了功能，去逛了一下pediawiki
+ADD : 地图种子，方便分享你的地图 [仅保存形状]
 
 2014-8-14
-ADD : ��ͼ���Ӹ���Ϊ Sigma(i=1,32) integer(MD5(SEED)[i])*i*2333 �����Ӽ�����
-ADD : ������Ϣ����[֧��WorldEdit����ʽ]
-	[WorldEdit����ʽ��ʽ]
-	1: ����ID:����ֵ
-	2: ����%����ID:����ֵ,����%����ID:����ֵ... [��Ϊ��������Ե�ʣ�ֻ�ܱ�����λС��
-		�磺 50%1,50%2
-ADD : ���ֵ��۵��ݴ���
-FIX : �޸���ͼ����BUG
-ADD : �����ļ�[����������۵Ĺ���]
-ADD : Ϲ�۵Ĳ�ɫ���
-ADD : ����Դ���ļ�
-FIX : ����gb2312������޸������������֧��
-ADD : ģ��Setblock���
-ADD : ģ��Setblock���ʻ����
-	WorldEdit��ֲ�������
-??? : �Ż��˿ռ䣬Ŀ������ĸ����ʱ��
+ADD : 地图种子更换为 Sigma(i=1,32) integer(MD5(SEED)[i])*i*2333 ，增加兼容性
+ADD : 方块信息读入[支持WorldEdit表达式]
+	[WorldEdit表达式格式]
+	1: 方块ID:附加值
+	2: 概率%方块ID:附加值,概率%方块ID:附加值... [因为编译器的缘故，只能保留两位小数
+		如： 50%1,50%2
+ADD : 各种蛋疼的容错性
+FIX : 修复地图种子BUG
+ADD : 语言文件[又是这个蛋疼的功能]
+ADD : 瞎眼的彩色输出
+ADD : 划分源码文件
+FIX : 根据gb2312编码表修复对中文输出的支持
+ADD : 模拟Setblock完毕
+ADD : 模拟Setblock概率化完毕
+	WorldEdit移植基本完成
+??? : 优化了空间，目测会消耗更多的时间
 
 2014-8-15
-??? : �ٴ��Ż��˿ռ�
-ADD : ��������Թ������㷨�������
-ADD : ��ʾ�����Ѿ���ȫ�����ⲿ�ļ�������
-ADD : ������ͼ
-ADD : PRIM�㷨�Թ������������
-FIX : �޸����������ڵ�����BUG
-FIX : �÷���������������� ����[0] ����
+??? : 再次优化了空间
+ADD : 深度优先迷宫生成算法制作完毕
+ADD : 显示语言已经完全改用外部文件读入了
+ADD : 导出地图
+ADD : PRIM算法迷宫生成制作完毕
+FIX : 修复生成器存在的严重BUG
+FIX : 让方块生成器不会输出 空气[0] 方块
 REL : alpha 0.0.1 Build 004
 
 2014-8-16
-REM : ɾ���˵ݹ�ָ��㷨
-	ʵ�����ǲ���д�������Ҳ�ϲ������㷨��
-	��������ȫ�ﲻ������ǿ��֢�����ã�������������ȷ�һ��
-REM : ɾ�����Թ�ǽ�ں�ȵ�ѡ��
-	��֪��Ϊʲô������������ܶ���ֵĴ���
-ADD : ������ǽ�Ĺ���
-	�����ɺõ��Թ���ǽ���ڵ�һЩ��������ǽ��������Ϸ�Ѷ�
-FIX : �޸����������ɷ��鼸������Ϊ������������˲������������
-ADD : ����TXT��ʽ�� ������ǽ ��������λ �Ĵ��ı�ƽ���ͼ
-	ʵ��������û����BMPͼƬ��˵����
-FIX : �Ľ���PRIM�㷨���ɵ��ٶ�
-	�Ժ�Ľ��ٶ�[�㷨]�Ļ������ܻᵼ��ͬһ�������ɺ���Թ���״��һ��
-ADD : ���������ļ��򵥵ķ���һ���࣬��һ����
-	ר�õĵ����ļ��� out\
-	�����˵����ļ���ʽ
-ADD : ����LUA�ű����������Է���ű��ļ���ʹ����������
-	���Դ�������Ĵ���
+REM : 删除了递归分割算法
+	实际上是不会写，反正我不喜欢这个算法，
+	做出来完全达不到逼死强迫症的作用，所以这个功能先放一下
+REM : 删除了迷宫墙壁厚度的选项
+	不知道为什么，这个会引发很多奇怪的错误
+ADD : 增加挖墙的功能
+	给生成好的迷宫的墙壁挖掉一些，适量挖墙会增加游戏难度
+FIX : 修复按比例生成方块几率中因为减数变量搞错了产生的奇怪问题
+ADD : 导出TXT格式由 ■代表墙 □代表空位 的纯文本平面地图
+	实际上我是没看懂BMP图片的说明书
+FIX : 改进了PRIM算法生成的速度
+	以后改进速度[算法]的话，可能会导致同一种子生成后的迷宫形状不一样
+ADD : 给输出后的文件简单的分了一下类，就一下下
+	专用的导出文件夹 out\
+	整理了导出文件格式
+ADD : 新增LUA脚本导出，可以放入脚本文件夹使用命令方块调用
+	可以储存更长的代码
 REL : alpha 0.0.2 Build 007
 
 2014-8-17
-FIX : ������ӣ����ID ?? -> 92
-ADD : ʹ��ģ�嵼��  {x,y,z,id,,},
-FIX : �����˲ݷ����ID 64 -> 62
-FIX : �޸��˵�����ͼ�Ĵ���
+FIX : 更正了樱花的ID ?? -> 92
+ADD : 使用模板导出  {x,y,z,id,,},
+FIX : 更正了草方块的ID 64 -> 62
+FIX : 修复了导出地图的错误
 REL : beta 0.9.0 Build 008
-ADD : [��ĩCould]���������� HPCMG -gui �Թ�ǽ��ID[�ַ���] �ײ�ID[�ַ���] ����ID[�ַ���]
-				�������[�ַ���] ǽ�ڸ߶�[����1..5] ��·����[����1..5]
-				��[����5..300] ��[����5..300] �򶴵ļ���[����0..100]
-				����������[����1..2] �������[����1..3]
-	���밴˳������������������п�����
+ADD : [芥末Could]免检命令调用 HPCMG -gui 迷宫墙壁ID[字符串] 底部ID[字符串] 顶部ID[字符串]
+				随机种子[字符串] 墙壁高度[数字1..5] 道路宽度[数字1..5]
+				长[数字5..300] 宽[数字5..300] 打洞的几率[数字0..100]
+				生成器名字[数字1..2] 输出方法[数字1..3]
+	必须按顺序载入参数，不可以有空数据
 REL : beta 0.9.1 Build 009
 
 2014-8-18
-ADD : �����˽�����ʾ
-FIX : �޸��˵���cmd����ɫʧЧ��BUG
-ADD : �������Զ����¹���[FTPЭ��
-FIX : �޸�ģ�岻��ʹ�� [����һ�����ţ�����һ������
-ADD : setting.ini�������Զ����¿���
-ADD : �Զ����setting.ini�Ƿ����
-ADD : �޸���WorldEdit����ʽ�� ������﷨ 
-	�� "1,2,3" ��ʾ ����1:����2:����3 = 1:1:1
-FIX : [�׻�]�Թ�����п�Ȧ����ҿ��������߶�
-ADD : [����]���������ļ��ٴη���
-FIX : ���ٲ��� ExistTest.txt �ļ�
-FIX : ������ĳɲ����ִ�Сд
-ADD : �������
-	�����żǵ�ȥ��
-	HPCMG [-n] [-w �Թ�ǽ��ID] [-b �ײ�ID] [-t ����ID] 
-		   [-r �������] [-wt ǽ�ڸ߶�] [-ww ��·����] 
-		   [-ml ��] [-mw ��] [-h �򶴵ļ���]
-		   [-gener ����������] [-output �������]
+ADD : 增加了进度提示
+FIX : 修复了调用cmd后颜色失效的BUG
+ADD : 增加了自动更新功能[FTP协议
+FIX : 修复模板不能使用 [多了一个逗号，少了一幅括号
+ADD : setting.ini中添加自动更新开关
+ADD : 自动监测setting.ini是否存在
+ADD : 修复了WorldEdit表达式的 均衡表达法 
+	如 "1,2,3" 表示 方块1:方块2:方块3 = 1:1:1
+FIX : [米花]迷宫外层有空圈，玩家可以任意走动
+ADD : [提米]给导出的文件再次分类
+FIX : 不再产生 ExistTest.txt 文件
+FIX : 把命令改成不区分大小写
+ADD : 命令调用
+	中括号记得去掉
+	HPCMG [-n] [-w 迷宫墙壁ID] [-b 底部ID] [-t 顶部ID] 
+		   [-r 随机种子] [-wt 墙壁高度] [-ww 道路宽度] 
+		   [-ml 长] [-mw 宽] [-h 打洞的几率]
+		   [-gener 生成器名字] [-output 输出方法]
 	=====  gener = DFS/1 | PRIM/BFS/2
 	===== output = Command/cmd/1 | template/temp/2 | luacode/lua/npl/3
 REL : beta 0.9.5 Build 16
 
 2014-8-19
-FIX : �޸�������ô��� -n
-FIX : �޸������ļ���ʱ���ֵĴ���
-FIX : �Ľ��˸��»���
-FIX ���޸���ģ�岻�ܵ����BUG
+FIX : 修复命令调用错误 -n
+FIX : 修复创建文件夹时出现的错误
+FIX : 改进了更新机制
+FIX ：修复了模板不能导入的BUG
 
 2014-9-6
-ADD : ����BASE64ģ�飬Ϊ��ͼ��Ϣ���ܶ�
+ADD : 添加BASE64模块，为地图信息串奋斗
 
 2014-9-20
-FIX : �������������޷������رճ����Ժ�������޼ɵ��ĸ����������ļ�����
+FIX : 修正升级功能无法正常关闭程序，以后可以肆无忌惮的更改主程序文件名了
 
 2014-9-21
-ADD : ���������� -rundir -outdir -outname
-	-rundir [�ַ���] ��ʾ��ĳ�ļ����¶�ȡ�ļ�
-	-outdir [�ַ���] ��ʾ���ļ������ĳ���ļ�����
-	-outname [�ַ���] ��ʾ������ļ����ļ�����ʲô����������չ�� .blocks.xml .lua .txt
-FIX : �޸��˹������л���[outdir][rundir]�ĵ��۴���
+ADD : 添加新命令 -rundir -outdir -outname
+	-rundir [字符串] 表示在某文件夹下读取文件
+	-outdir [字符串] 表示把文件输出在某个文件夹下
+	-outname [字符串] 表示输出的文件的文件名是什么【不包括扩展名 .blocks.xml .lua .txt
+FIX : 修复了关于运行环境[outdir][rundir]的蛋疼错误
 
 2014-9-27
-FIX : �޸��˼�⵽����֮���������ʾ����
-FIX : �޸����޷���ȷ�ļ��/�ָ����Ĵ���
-XXX : ��ʼ��Ͷ�� Hello! Paracraft Schematic �Ŀ���
-XXX : ����������ظ��·�����[FTP]��������
+FIX : 修复了检测到更新之后的文字显示错误
+FIX : 修复了无法正确的检测/分隔符的错误
+XXX : 开始了投入 Hello! Paracraft Schematic 的开发
+XXX : 求服务器搭载更新服务器[FTP]。。。。
 
 2014-10-1
-XXX : ����ڿ���
-FIX : ��д�����������ʽ
-ADD : �Զ����������ļ�
-FIX : һ��BUG������ϸ�ڣ�����˵��ô���� _(:�١���)_
-XXX : ������ʽ�� 1.0.0
+XXX : 国庆节快乐
+FIX : 重写了文字输出格式
+ADD : 自动创建语言文件
+FIX : 一坨BUG，都是细节，懒得说这么多了 _(:з」∠)_
+XXX : 发布正式版 1.0.0
 
 2014-10-2
-ADD : �Զ��󿪣��Զ���ǽ�����س�����
-	Ϊ��ʵ��������۵Ĺ��ܣ����㻨����һ������
+ADD : 脑洞大开，自定义墙体厚度重出江湖
+	为了实现这个蛋疼的功能，足足花了我一个下午
 
 2014-10-4
-FIX : �Ż�RPIM�����㷨��ʹ��ͬ���������°�;ɰ����ɳ����Ľ����һ��
-	��������С���ֵ���ͬ�ĵط�
-ADD : ���ɵ�ͼ�����еĽ�����ʾ
+FIX : 优化RPIM生成算法，使相同的种子用新版和旧版生成出来的结果不一样
+	不过会有小部分的相同的地方
+ADD : 生成地图过程中的进度显示
 
 2014-10-11
-FIX : �Ż�PRIM�㷨�ﵽ���ɲ��ֵ�ͼ��������Ժ�ʱС��1��
-ADD : һ���ֵ�Ԥ���趨
+FIX : 优化PRIM算法达到生成部分地图大多数电脑耗时小于1秒
+ADD : 一部分的预设设定
 
 2014-10-26
-FIX : �޸��򶴼��ʴ���
+FIX : 修复打洞几率错误
 
 2014-12-3
-ADD : ����github
+ADD : 加入github
+
+2015-2-21
+ADD : 模块化 [文件夹创建] 提高运行效率一丢丢
